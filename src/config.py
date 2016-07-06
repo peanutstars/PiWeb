@@ -16,7 +16,6 @@ config = {
         # 'log.error_file': './error.log' ,
     } ,
     '/' : {
-        # 'tools.sessions.on' : True ,
         'tools.staticdir.on' : True ,
         'tools.staticdir.root' : os.path.abspath(os.getcwd()) ,
         'tools.staticdir.dir' : './public' ,
