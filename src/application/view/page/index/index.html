@@ -1,6 +1,65 @@
 {% extends 'layout/main.html' %}
 {% block content %}
-  <div class='span-18 last'>
-      <p>Root page</p>
-  </div>
+<!-- Main -->
+    <div id="main">
+        <div class="inner">
+            <header>
+                <h1>This is Phantom, a free, fully responsive site<br />
+                template designed by <a href="http://html5up.net">HTML5 UP</a>.</h1>
+                <p>Etiam quis viverra lorem, in semper lorem. Sed nisl arcu euismod sit amet nisi euismod sed cursus arcu elementum ipsum arcu vivamus quis venenatis orci lorem ipsum et magna feugiat veroeros aliquam. Lorem ipsum dolor sit amet nullam dolore.</p>
+            </header>
+            <section class="tiles">
+                <!--<article class="style1">
+                    <span class="image">
+                        <img src="images/pic01.jpg" alt="" />
+                    </span>
+                    <a href="device.html">
+                        <h2>Magna</h2>
+                        <div class="content">
+                            <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                        </div>
+                    </a>
+                </article>-->
+            </section>
+        </div>
+    </div>
+{% endblock %}
+{% block contentscript %}
+<script type="text/javascript">
+    $(function () {
+        zhub.getSensor('all', function(response){
+            var strTile = '' ;
+            var strMenu = '' ;
+            if (response.success) {
+                item = response.value ;
+                for (var ii in item) {
+                    var name = item[ii].name ;
+                    var uid = item[ii].uid ;
+                    if (name == 'None') {
+                        name = item[ii].manufacturer + '.' + item[ii].model ;
+                    }
+                    strTile += '<article class="style'+((ii%6)+1)+'">' ;
+                    strTile += '    <span class="image">' ;
+                    strTile += '        <img src="images/pic'+ ("0" + ((ii%16)+1)).slice(-2) +'.jpg" alt="" />' ;
+                    strTile += '    </span>' ;
+                    strTile += '    <a href="device/'+ uid +'">' ;
+                    strTile += '        <h2>' + name + '</h2>' ;
+                    strTile += '        <div class="content">' ;
+                    strTile += '            <p>'+ uid + '<br/>Ver '+ item[ii].appversion/10.0 ;
+                        if (item[ii].swbuild != 'None') {
+                            strTile += '@' + item[ii].swbuild ;
+                        }
+                    strTile +=             '</p>'
+                    strTile += '        </div>' ;
+                    strTile += '    </a>' ;
+                    strTile += '</article>' ;
+                    strMenu += '<li><a href="/device/'+uid+'">'+name+'</a></li>'
+                }
+            }
+            // console.log(str) ;
+            $("#main section").prepend(strTile) ;
+            $("#first-menu").append(strMenu) ;
+        }) ;
+    }) ;
+</script>
 {% endblock %}
