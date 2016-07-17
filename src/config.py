@@ -26,4 +26,9 @@ config = {
         # 'tools.response_headers.on': True ,
         # 'tools.response_headers.headers': [('Content-Type', 'text/plain')],
     } ,
+    '/bookmark' : {
+        'request.dispatch' : cherrypy.dispatch.MethodDispatcher() ,
+        'tools.response_headers.on': True ,
+        'tools.response_headers.headers': [('Content-Type', 'text/plain')],
+    } ,
 }

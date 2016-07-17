@@ -4,10 +4,18 @@
 import datetime
 import cherrypy
 
-
-class Index:
+class Bookmark :
+    exposed = True ;
     def __init__(self) :
         pass ;
+    @cherrypy.tools.accept(media='text/plain')
+    def GET(self) :
+        return "{'menu':'test'}" ;
+
+class Index:
+    bookmark = None ;
+    def __init__(self) :
+        self.bookmark = Bookmark() ;
 
     @cherrypy.tools.template
     def index(self):
