@@ -9,7 +9,7 @@ path   = os.path.abspath(os.path.dirname(__file__))
 config = {
     'global' : {
         'server.socket_host': '0.0.0.0' ,
-        'server.socket_port': 8080 ,
+        'server.socket_port': 8000 ,
         'engine.autoreload.on': False ,
         # 'tools.trailing_slash.on' : False ,
         # 'log.access_file': './access.log' ,
