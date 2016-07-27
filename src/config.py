@@ -9,7 +9,7 @@ path   = os.path.abspath(os.path.dirname(__file__))
 config = {
     'global' : {
         'server.socket_host': '0.0.0.0' ,
-        'server.socket_port': 8000 ,
+        'server.socket_port': 8888 ,
         'engine.autoreload.on': False ,
         # 'tools.trailing_slash.on' : False ,
         # 'log.access_file': './access.log' ,
@@ -27,6 +27,11 @@ config = {
         # 'tools.response_headers.headers': [('Content-Type', 'text/plain')],
     } ,
     '/bookmark' : {
+        'request.dispatch' : cherrypy.dispatch.MethodDispatcher() ,
+        'tools.response_headers.on': True ,
+        'tools.response_headers.headers': [('Content-Type', 'text/plain')],
+    } ,
+    '/users' : {
         'request.dispatch' : cherrypy.dispatch.MethodDispatcher() ,
         'tools.response_headers.on': True ,
         'tools.response_headers.headers': [('Content-Type', 'text/plain')],
