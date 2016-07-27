@@ -1,8 +1,19 @@
 # -*- coding: utf-8 -*-
+import re ;
+import os ;
+import base64 ;
+import subprocess ;
+import urllib ;
+import config ;
+import cherrypy ;
 
-
-import datetime
-import cherrypy
+class Auth :
+    def __init__(self) :
+        self.clientKey = None ;
+    def setClientKey(self, key) :
+        self.clientKey = key ;
+    def getClientKey(self) :
+        return self.clientKey ;
 
 class Web :
     def fixedSession(self) :
@@ -17,32 +28,53 @@ class Bookmark(Web) :
 
 class UserAuthentication(Web) :
     exposed = True ;
+    def __init__(self, auth) :
+        self.auth = auth ;
     @cherrypy.tools.accept(media='text/plain')
-    def GET(self) :
-        print '@@@ UserAuthentication.GET'
-        return "{'operation':'authentication1'}"
+    def POST(self, jCryption) :
+        jcrypted = base64.b64decode(jCryption) ;
+        key = self.auth.getClientKey() ;
+        print '%%' , key ;
+        cmd = '/usr/bin/openssl enc -aes-256-cbc -pass pass:%s -d' % key ;
+        p = subprocess.Popen(cmd.split(), stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE) ;
+        param, stderr = p.communicate(jcrypted) ;
+        if len(stderr) :
+            print '##', stderr ;
 
-    @cherrypy.tools.accept(media='text/plain')
-    def POST(self) :
-        print '@@@ UserAuthentication.POST'
+        print '@@@ UserAuthentication.POST', urllib.unquote(param).decode('utf8') ;
         return "{'operation':'authentication2'}"
 
 class UserPubKey(Web) :
     exposed = True ;
+    def __init__(self, auth) :
+        self.auth = auth ;
     @cherrypy.tools.accept(media='text/plain')
     def GET(self) :
-        pubkey = '''MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDkkNAitgyac7/wYLfcefLklXbEA2XL/VQvr3SvDNFBO/S/0Fw3ZQbpmZWcM8jWgcntno5/ALOfQ4g/GhXdv4G89r6zazHcFa+S3t9ocMMW4y5kjfQ+243OPH2mVaNVxgN2mD2O5xLJEXzfP6qH94ih6Wf34j4GdiRajGduhOwvvQIDAQAB'''
-        return '{"publickey": "%s" }' % pubkey ;
+        with open('%s/rsa_1024_pub.pem' % config.path, "r") as f :
+            pubkey = f.read().split('\n') ;
+        return '{"publickey": "%s" }' % ''.join(pubkey[1:-2]) ;
 
 class UserHandshake(Web) :
     exposed = True ;
+    def __init__(self, auth) :
+        self.auth = auth ;
     @cherrypy.tools.accept(media='text/plain')
-    def GET(self) :
-        print '@@@ UserHandshake.GET'
-        return "{}" ;
-    def POST(self) :
-        print '@@@ UserHandshake.POST'
-        return "{'challenge':'handshake'}" ;
+    def POST(self, key) :
+        encKey = base64.b64decode(re.sub(r'[^a-zA-Z0-9/=+]', '',key)) ;
+        cmd = '/usr/bin/openssl rsautl -decrypt -inkey %s/rsa_1024_priv.pem' % config.path ;
+        p = subprocess.Popen(cmd.split(), stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE) ;
+        key, stderr = p.communicate(encKey) ;
+        if len(stderr) :
+            print '##', stderr ;
+        key = re.sub(r'[^a-zA-Z0-9]', '', key) ;
+        self.auth.setClientKey(key) ;
+        print '%%' , key ;
+        cmd ="/usr/bin/openssl enc -aes-256-cbc -pass pass:%s -a -e" % key ;
+        p = subprocess.Popen(cmd.split(), stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE) ;
+        encKey, stderr = p.communicate(key) ;
+        if len(stderr) :
+            print '##', stderr ;
+        return '{"challenge":"%s"}' % re.sub(r'[^a-zA-Z0-9/+=]', '' , encKey) ;
 
 
 class Users(Web) :
@@ -52,11 +84,12 @@ class Index(Web) :
     bookmark = None ;
     users = None ;
     def __init__(self) :
+        self.auth = Auth() ;
         self.bookmark = Bookmark() ;
         self.users = Users() ;
-        self.users.authentication = UserAuthentication() ;
-        self.users.pubkey = UserPubKey() ;
-        self.users.handshake = UserHandshake() ;
+        self.users.authentication = UserAuthentication(self.auth) ;
+        self.users.pubkey = UserPubKey(self.auth) ;
+        self.users.handshake = UserHandshake(self.auth) ;
 
 
     @cherrypy.tools.template
