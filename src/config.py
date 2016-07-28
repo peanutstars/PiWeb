@@ -34,6 +34,6 @@ config = {
     '/users' : {
         'request.dispatch' : cherrypy.dispatch.MethodDispatcher() ,
         'tools.response_headers.on': True ,
-        'tools.response_headers.headers': [('Content-Type', 'text/plain')],
+        'tools.response_headers.headers': [('Content-Type', 'application/json')],
     } ,
 }
