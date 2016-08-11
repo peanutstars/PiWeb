@@ -2,11 +2,9 @@
 {% block content %}
 <!-- Main -->
     <div id="main">
-        <div class="inner">
+        <div class="inner" id="bookmark">
             <h1>Bookmark</h1>
-            <section>
-            </section>
-            <section>
+            {# <section>
                 <h2>Get in touch</h2>
                 <form method="POST" action="/users/authentication">
                     <div class="field half first">
@@ -22,7 +20,7 @@
                         <li><button type="submit" value="Send" class="special" />send</li>
                     </ul>
                 </form>
-            </section>
+            </section>#}
         </div>
     </div>
 {% endblock %}
@@ -30,9 +28,29 @@
 <script type="text/javascript">
     $(function (){
         psutil.getBookmark(function(resp){
-            console.log(resp) ;
+            renderBookmark(resp.bookmark) ;
         }) ;
         $("form").jCryption({ getKeysURL: "/users/pubkey", handshakeURL: "/users/handshake" })
     }) ;
+    function renderBookmark(data) {
+        function renderBookmarkTitle(sel, title) {
+            var str = '<section><h3>'+title+'</h3>' ;
+            str += '<ul class="actions" id="'+psutil.generateSelector('bookmark',title)+'"></ul>' ;
+            $(sel).append(str) ;
+        }
+        function renderBookmarkItem(sel, name, link) {
+            var item = '<li><a href="'+link+'" class="button"><span class="image" style="vertical-align: middle;"><img src="'+psutil.getFaviconUrl(link)+'" style="width: 16px;height: 16px;" /></span> <span>'+name+'</span></a></li>'
+            $(sel).append(item) ;
+        }
+        data.forEach(function(t){
+            // console.log(t.name) ;
+            renderBookmarkTitle('#bookmark', t.name) ;
+            var itemSelName = '#'+psutil.generateSelector('bookmark',t.name) ;
+            t.list.forEach(function(s){
+                console.log(s) ;
+                renderBookmarkItem(itemSelName, s.title, s.link) ;
+            }) ;
+        }) ;
+    }
 </script>
 {% endblock %}

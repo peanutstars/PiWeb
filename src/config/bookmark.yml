@@ -1,0 +1,26 @@
+# -*- coding: utf-8 -*-
+# bookmark
+
+bookmark:
+    - name: Family
+      list:
+        - title: Child U
+          link: http://www.childu.co.kr/campus/intro_main.asp
+        - title: Google
+          link: http:/www.google.com
+        - title: 다음
+          link: http://www.daum.net
+        - title: 네이버
+          link: http:/www.naver.com
+    - name: DOC
+      list:
+        - title: Tutorials Point
+          link: http://www.tutorialspoint.com
+    - name: 금융기관
+      list:
+        - title: 국민
+          link: https://www.kbstar.com
+        - title: 신한
+          link: http://www.shinhan.com
+        - title: 신한C
+          link: https://www.shinhancard.com

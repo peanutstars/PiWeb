@@ -1,13 +1,19 @@
 # -*- coding: utf-8 -*-
-import re ;
-import os ;
-import time ;
+
+import re, os, time ;
+import codecs, yaml ;
 import base64 ;
 import random ;
 import subprocess ;
 import urllib ;
 import config ;
 import cherrypy ;
+
+from model import WebResponse ;
+
+class Web :
+    def fixedSession(self) :
+        cherrypy.session['sessionKey'] = 'Assigned' ;
 
 class AuthKey :
     KEY_PATH = '/tmp/.yekhtua'
@@ -87,10 +93,6 @@ class AuthKey :
     def getClientKey(self) :
         return self.clientKey ;
 
-class Web :
-    def fixedSession(self) :
-        cherrypy.session['sessionKey'] = 'Assigned' ;
-
 class UserAuthentication(Web) :
     exposed = True ;
     def __init__(self, auth) :
@@ -153,17 +155,31 @@ class Users(Web) :
 
 class Bookmark(Web) :
     exposed = True ;
+    def __init__(self, bmfile) :
+        self.__bmfile = bmfile ;
+        self.__stamp = 0 ;
+    def __loadBookmark(self) :
+        stamp = os.stat(self.__bmfile).st_mtime ;
+        if stamp != self.__stamp :
+            self.__stamp = stamp ;
+            with codecs.open(self.__bmfile, 'r', encoding='utf8') as f :
+                try :
+                    self.__data = yaml.load(f) ;
+                except yaml.YAMLError as e :
+                    print(e) ;
+
     @cherrypy.tools.accept(media='text/plain')
     def GET(self) :
         self.fixedSession() ;
-        return "{'menu':'test'}" ;
+        self.__loadBookmark() ;
+        return WebResponse(True, self.__data).toString() ;
 
 class Index(Web) :
     bookmark = None ;
     users = None ;
     def __init__(self) :
         self.auth = AuthKey() ;
-        self.bookmark = Bookmark() ;
+        self.bookmark = Bookmark(config.path+'/config/bookmark.yml') ;
         self.users = Users() ;
         self.users.authentication = UserAuthentication(self.auth) ;
         self.users.pubkey = UserPubKey(self.auth) ;
@@ -173,6 +189,7 @@ class Index(Web) :
     @cherrypy.tools.template
     def index(self):
         self.fixedSession() ;
+        return config.setup['view'] ;
 
 def errorPage(status, message, **kwargs):
     return cherrypy.tools.template._engine.get_template('page/error.html').render()

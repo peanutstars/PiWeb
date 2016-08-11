@@ -32,15 +32,22 @@ var psutil = {
     , doAjax : function(opts, callback) {
         opts.success = function(response) {
             if (callback) {
-                callback(response) ;
+                callback(response.value) ;
             }
         } ,
         opts.error = function(response) {
-            console.log('Fail\n' + response) ;
+            console.log('Fail\n' + response.errorMsg) ;
         }
         $.ajax(opts) ;
     }
     , getBookmark : function(callback) {
         this.get('/bookmark', {}, callback) ;
+    }
+    , generateSelector : function(prefix, name) {
+        return prefix+'-'+name.replace(/ /g,'-') ;
+    }
+    , getFaviconUrl : function(url) {
+        var u = new URL(url) ;
+        return u.protocol+'//'+u.hostname+'/favicon.ico' ;
     }
 } ;
