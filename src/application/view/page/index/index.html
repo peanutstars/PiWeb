@@ -38,8 +38,10 @@
             str += '<ul class="actions" id="'+psutil.generateSelector('bookmark',title)+'"></ul>' ;
             $(sel).append(str) ;
         }
-        function renderBookmarkItem(sel, name, link) {
-            var item = '<li><a href="'+link+'" class="button"><span class="image" style="vertical-align: middle;"><img src="'+psutil.getFaviconUrl(link)+'" style="width: 16px;height: 16px;" /></span> <span>'+name+'</span></a></li>'
+        function renderBookmarkItem(sel, bi) {
+            var item = '<li><a href="'+bi.link+'" class="button"><span class="image" style="vertical-align: middle;">' ;
+            item += (bi.icon) ? '<img src="'+psutil.getFaviconUrl(bi.link)+'" style="width: 16px;height: 16px;" />' : '';
+            item += '</span> <span>'+bi.title+'</span></a></li>'
             $(sel).append(item) ;
         }
         data.forEach(function(t){
@@ -48,7 +50,7 @@
             var itemSelName = '#'+psutil.generateSelector('bookmark',t.name) ;
             t.list.forEach(function(s){
                 console.log(s) ;
-                renderBookmarkItem(itemSelName, s.title, s.link) ;
+                renderBookmarkItem(itemSelName, s) ;
             }) ;
         }) ;
     }

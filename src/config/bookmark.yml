@@ -7,20 +7,100 @@ bookmark:
         - title: Child U
           link: http://www.childu.co.kr/campus/intro_main.asp
         - title: Google
-          link: http:/www.google.com
+          link: http://www.google.com
+          icon: true
         - title: 다음
           link: http://www.daum.net
+          icon: true
         - title: 네이버
-          link: http:/www.naver.com
-    - name: DOC
+          link: http://www.naver.com
+          icon: true
+    - name: Work
       list:
+        - title: GCalendar
+          link: https://calendar.google.com
+          icon: false
+        - title: GMail
+          link: https://mail.google.com
+          icon: true
+        - title: Slack
+          link: https://sj-pdt.slack.com/messages
+          icon: true
+        - title: GDrive
+          link: https://drive.google.com
+          icon: true
+        - title: Redmine
+          link: http://software.samjin.com/redmine
+        - title: SJ Mail
+          link: http://mail.samjin.com
+        - title: Color-scripter
+          link: http://colorscripter.com/
+          icon: true
+    - name: SmartThings
+      list:
+        - title: DropBox
+          link: https://www.dropbox.com/home
+        - title: Jira
+          link: https://smartthings.atlassian.net/secure/RapidBoard.jspa?rapidView=149&projectKey=SMJN&view=detail
+        - title: Develop
+          link: https://graph.api.smartthings.com/ide/devices
+    - name: Reference Site
+      list:
+        - title: Stackoverflow
+          link: http://stackoverflow.com/
+          icon: true
         - title: Tutorials Point
           link: http://www.tutorialspoint.com
+          icon: true
+        - title: W3 Schools
+          link: http://www.w3schools.com/
+          icon: true
+        - title: Android API
+          link: https://developer.android.com/reference/packages.html
+          icon: true
+        - title: Bash Shell
+          link: http://wiki.kldp.org/HOWTO//html/Adv-Bash-Scr-HOWTO/index.html
+          icon: true
+        - title: Netfilter 
+          link: http://www.netfilter.org/
+          icon: true 
+        - title: IT eBooks
+          link: http://it-ebooks.info/
+          icon: true
+        - title: Naver D2
+          link: http://d2.naver.com/helloworld
+          icon: true
+    - name: Python-DOC
+      list:
+        - title: DOC-2.7
+          link: https://docs.python.org/2/contents.html
+          icon: true
+        - title: PyMOTW
+          link: https://pymotw.com/2/genindex.html
+          icon: false
+        - title: Python Potal
+          link: https://www.python.org/doc/
+          icon: false
     - name: 금융기관
       list:
         - title: 국민
           link: https://www.kbstar.com
+          icon: true
         - title: 신한
           link: http://www.shinhan.com
+          icon: true
         - title: 신한C
           link: https://www.shinhancard.com
+          icon: true
+        - title: 지로
+          link: http://www.giro.or.kr
+          icon: true
+        - title: 신협
+          link: https://openbank.cu.co.kr
+          icon: true
+        - title: 기업
+          link: http://www.kiupbank.co.kr
+          icon: true
+        - title: 하나
+          link: https://www.kebhana.com
+          icon: true

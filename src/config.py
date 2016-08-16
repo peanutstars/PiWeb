@@ -34,7 +34,7 @@ with codecs.open(path+'/config/setup.yml', 'r', encoding='utf8') as f :
 config = {
     'global' : {
         'server.socket_host': '0.0.0.0' ,
-        'server.socket_port': 8888 ,
+        'server.socket_port': 80 ,
         'engine.autoreload.on': False ,
         # 'tools.trailing_slash.on' : False ,
         # 'log.access_file': './access.log' ,
