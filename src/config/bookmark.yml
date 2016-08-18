@@ -4,8 +4,9 @@
 bookmark:
     - name: Family
       list:
-        - title: Child U
-          link: http://www.childu.co.kr/campus/intro_main.asp
+        - title: Use School
+          link: http://www.useschool.co.kr/
+          icon: false
         - title: Google
           link: http://www.google.com
           icon: true
@@ -15,17 +16,27 @@ bookmark:
         - title: 네이버
           link: http://www.naver.com
           icon: true
+        - title: 네이버사전
+          link: http://endic.naver.com/
+          icon: true
+        - title: 다음사전
+          link: http://alldic.daum.net/index.do?dic=ee
+          icon: true
+        - title: G-Trans
+          link: https://translate.google.co.kr/?hl=ko
+          icon: true
+
     - name: Work
       list:
-        - title: GCalendar
-          link: https://calendar.google.com
-          icon: false
         - title: GMail
           link: https://mail.google.com
           icon: true
         - title: Slack
           link: https://sj-pdt.slack.com/messages
           icon: true
+        - title: GCalendar
+          link: https://calendar.google.com
+          icon: false
         - title: GDrive
           link: https://drive.google.com
           icon: true
@@ -36,6 +47,13 @@ bookmark:
         - title: Color-scripter
           link: http://colorscripter.com/
           icon: true
+        - title: GitHub/PS
+          link: https://github.com/peanutstars
+          icon: true
+        - title: PS-ZHub
+          link: http://pstarsapp.mooo.com:8080
+          icon: true
+
     - name: SmartThings
       list:
         - title: DropBox
@@ -61,9 +79,9 @@ bookmark:
         - title: Bash Shell
           link: http://wiki.kldp.org/HOWTO//html/Adv-Bash-Scr-HOWTO/index.html
           icon: true
-        - title: Netfilter 
+        - title: Netfilter
           link: http://www.netfilter.org/
-          icon: true 
+          icon: true
         - title: IT eBooks
           link: http://it-ebooks.info/
           icon: true
@@ -81,6 +99,20 @@ bookmark:
         - title: Python Potal
           link: https://www.python.org/doc/
           icon: false
+    - name: Shopping
+      list:
+        - title:  에누리
+          link: http://www.enuri.com/
+          icon: true
+        - title:  쿠팡
+          link: http://www.coupang.com/
+          icon: true
+        - title: 11번가
+          link : http://www.11st.co.kr/
+          icon: true
+        - title: G-Market
+          link: http://www.gmarket.co.kr/
+          icon: true
     - name: 금융기관
       list:
         - title: 국민
