@@ -47,7 +47,9 @@ var psutil = {
         return prefix+'-'+name.replace(/ /g,'-') ;
     }
     , getFaviconUrl : function(url) {
-        var u = new URL(url) ;
-        return u.protocol+'//'+u.hostname+'/favicon.ico' ;
+        //var u = new URL(url) ;
+        //return u.protocol+'//'+u.hostname+'/favicon.ico' ;
+        var arr = url.split('/') ;
+        return arr[0] + '//' + arr[2] + '/favicon.ico' ;
     }
 } ;
