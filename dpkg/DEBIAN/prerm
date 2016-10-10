@@ -1,0 +1,14 @@
+#!/bin/bash
+
+DIR_TARGET=/opt/psapps/piweb
+
+#
+echo "Executing prerm"
+
+if [ -e "$DIR_TARGET" ] ; then
+    piweb stop
+    find $DIR_TARGET -name "*.pyc" -exec rm -rf {} \;
+    find $DIR_TARGET -name "__pycache__" -exec rm -rf {} \;
+fi
+
+update-rc.d -f piweb remove

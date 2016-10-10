@@ -1,0 +1,30 @@
+#!/bin/bash
+
+DIR_TARGET=/opt/psapps/piweb
+
+#SetUserMode() {
+#	USER_ID=`cat /etc/passwd | grep 1000 | awk -F: '{ print $1 }'`
+#	usermod -a -G dialout $USER_ID
+#}
+
+SetupPythonModule() {
+    #pip3 install "cherrypy==5.4.0"
+    pip3 install cherrypy
+    pip3 install jinja2
+    pip3 install pyyaml
+}
+
+AccountGroup() {
+    USER=`/usr/bin/logname`
+    GROUP=`grep psapps /etc/group`
+    [ -z "$GROUP" ] && addgroup psapps
+    GUSER=`echo $GROUP | grep $USER`
+    [ -z "$GUSER" ] && usermod -a -G psapps $USER
+}
+
+#
+echo "Executing preinst >>"
+
+#SetUserMode
+SetupPythonModule
+AccountGroup

@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# This script is entry for piweb
+
+PiWeb=/opt/psapps/piweb
+
+msg() {
+	echo -e "$1"
+}
+
+usage() {
+	msg "Usage : piweb <cmd> [...]"
+	msg "\t<cmd>"
+	msg "\tpiweb start [--daemon]            start a piweb"
+    msg "\tpiweb stop                        stop a piweb"
+}
+
+CMD=$1
+shift
+
+pushd $PiWeb
+
+case "$CMD" in
+	start)
+		sg psapps -c "./piwserver.py $*"
+		;;
+    stop)
+        sg psapps -c "killall -INT piwserver.py"
+        ;;
+	*)
+		usage
+		;;
+esac
+
+popd

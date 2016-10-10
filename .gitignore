@@ -3,4 +3,5 @@
 *.bak
 *.deb
 dpkg/opt
+dpkg/DEBIAN/control
 src/application/version.py

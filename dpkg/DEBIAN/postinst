@@ -1,0 +1,13 @@
+#!/bin/bash
+
+DIR_TARGET=/opt/psapps/piweb
+
+
+PiWebService() {
+    update-rc.d piweb defaults 99 10
+}
+
+#
+echo "Executing postinst"
+
+PiWebService
