@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import codecs ;
+import datetime ;
 import os ;
 import yaml ;
 import cherrypy ;
 
+from application.version import Version ;
 
 path   = os.path.abspath(os.path.dirname(__file__))
 
@@ -30,6 +32,9 @@ with codecs.open(path+'/config/setup.yml', 'r', encoding='utf8') as f :
     except yaml.YAMLError as e :
         setup = defaultSetup ;
         print(e) ;
+    setup['view']['version'] = Version.getVersion() ;
+    setup['view']['build_time'] = \
+        datetime.datetime.fromtimestamp(Version.getBuildTime()).utcnow().strftime('%Y-%m-%d %H:%M:%S-UTC') ;
 
 config = {
     'global' : {

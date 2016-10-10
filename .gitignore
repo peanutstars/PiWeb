@@ -1,4 +1,6 @@
 *.pyc
 *.swp
 *.bak
-phantom
+*.deb
+dpkg/opt
+src/application/version.py

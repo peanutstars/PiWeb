@@ -61,6 +61,6 @@ def bootstrap():
     cherrypy.tools.template = TemplateTool()
     cherrypy.config.update(config.config)
 
-    import controller
+    from application import controller
     cherrypy.config.update({'error_page.default': controller.errorPage})
     cherrypy.tree.mount(controller.Index(), '/', config.config)

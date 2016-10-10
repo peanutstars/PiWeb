@@ -9,7 +9,7 @@ import urllib ;
 import config ;
 import cherrypy ;
 
-from model import WebResponse ;
+from application.model import WebResponse ;
 
 class Web :
     def fixedSession(self) :
@@ -107,8 +107,8 @@ class UserAuthentication(Web) :
         p = subprocess.Popen(cmd.split(), stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE) ;
         param, stderr = p.communicate(jcrypted) ;
         if len(stderr) :
-            print '##', stderr ;
-        print '@@@ UserAuthentication.POST', urllib.unquote(param.replace('+', ' ')).decode('utf8') ;
+            print ('##') ;
+        print ('@@@ UserAuthentication.POST', urllib.unquote(param.replace('+', ' ')).decode('utf8')) ;
         return "{'operation':'authentication2'}"
 
 class UserPubKey(Web) :
