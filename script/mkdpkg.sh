@@ -24,7 +24,7 @@ checkArchitecture() {
 	# 		;;
 	# esac
 	# [ "$Architecture" == "unknown" ] && echo -e "\n\tArchitecture is unknown.\n" && exit 1
-	Architecture="any"
+	Architecture="all"
 }
 
 generateControl() {
