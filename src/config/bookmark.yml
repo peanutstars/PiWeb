@@ -25,7 +25,33 @@ bookmark:
         - title: G-Trans
           link: https://translate.google.co.kr/?hl=ko
           icon: true
-
+        - title: N-Trans
+          link: http://translate.naver.com/#/ko/en
+    - name: Kids
+      list:
+        - title: G-MAP
+          link: https://maps.google.com/
+          icon: true
+        - title: 소프트웨어중심 사회
+          link: http://software.kr
+        - title: CORD.ORG
+          link: http://code.org
+        - title: EBS 소프트웨어
+          link: http://home.ebs.co.kr/softare
+        - title: 엔트리
+          link: http://playentry.org
+          icon: true
+        - title: 스크래치
+          link: http://scratch.mit.edu
+          icon: true
+    - name: Funny
+      list:
+        - title: Youtube
+          link: https://www.youtube.com
+        - title: Facebook
+          link: https://www.facebook.com
+        - title: ZDNet
+          link: http://www.zdnet.co.kr
     - name: Work
       list:
         - title: GMail
