@@ -4,6 +4,15 @@
 
 PiWeb=/opt/psapps/piweb
 
+run_noip2() {
+    NOIP2=/usr/local/bin/noip2
+    if [ -e "$NOIP2" ] ; then
+        killall -9 noip2
+        sleep 0.5
+        /usr/local/bin/noip2
+    fi
+}
+
 msg() {
 	echo -e "$1"
 }
@@ -22,6 +31,7 @@ pushd $PiWeb
 
 case "$CMD" in
 	start)
+        run_noip2
 		sg psapps -c "./piwserver.py $*"
 		;;
     stop)
