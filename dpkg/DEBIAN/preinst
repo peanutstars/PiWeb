@@ -20,6 +20,7 @@ AccountGroup() {
     [ -z "$GROUP" ] && addgroup psapps
     GUSER=`echo $GROUP | grep $USER`
     [ -z "$GUSER" ] && usermod -a -G psapps $USER
+    echo "Add a account into group."
 }
 
 #
