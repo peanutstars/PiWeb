@@ -39,7 +39,7 @@
             $(sel).append(str) ;
         }
         function renderBookmarkItem(sel, bi) {
-            var item = '<li><a href="'+bi.link+'" class="button"><span class="image" style="vertical-align: middle;">' ;
+            var item = '<li><a href="'+bi.link+'" class="button small"><span class="image" style="vertical-align: middle;">' ;
             item += (bi.icon) ? '<img src="'+psutil.getFaviconUrl(bi.link)+'" style="width: 16px;height: 16px;" />' : '';
             item += '</span> <span>'+bi.title+'</span></a></li>'
             $(sel).append(item) ;
