@@ -5,3 +5,6 @@
 dpkg/opt
 dpkg/DEBIAN/control
 src/application/version.py
+src/public/assets/sass/.sass-cache/
+src/public/assets/sass/main.css.map
+

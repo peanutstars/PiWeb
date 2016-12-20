@@ -194,6 +194,98 @@
 							$menu._hide();
 
 				});
+		// Modal.
+			var $modal = $('#modal');
+
+			$modal.wrapInner('<div class="inner"></div>');
+
+			$modal._locked = false;
+
+			$modal._lock = function() {
+
+				if ($modal._locked)
+					return false;
+
+				$modal._locked = true;
+
+				window.setTimeout(function() {
+					$modal._locked = false;
+				}, 350);
+
+				return true;
+
+			};
+
+			$modal._show = function() {
+
+				if ($modal._lock())
+					$body.addClass('is-modal-visible');
+
+			};
+
+			$modal._hide = function() {
+
+				if ($modal._lock())
+					$body.removeClass('is-modal-visible');
+
+			};
+
+			$modal._toggle = function() {
+
+				if ($modal._lock())
+					$body.toggleClass('is-modal-visible');
+
+			};
+
+			$modal
+				.appendTo($body)
+				.on('click', function(event) {
+					event.stopPropagation();
+				})
+				.on('click', 'a', function(event) {
+
+					var href = $(this).attr('href');
+
+					event.preventDefault();
+					event.stopPropagation();
+
+					// Hide.
+						$modal._hide();
+
+					// Redirect.
+						if (href == '#modal')
+							return;
+
+						window.setTimeout(function() {
+							window.location.href = href;
+						}, 350);
+
+				})
+				.append('<a class="close" href="#modal">Close</a>');
+
+			$body
+				.on('click', 'a[href="#modal"]', function(event) {
+
+					event.stopPropagation();
+					event.preventDefault();
+
+					// Toggle.
+						$modal._toggle();
+
+				})
+				.on('click', function(event) {
+
+					// Hide.
+						$modal._hide();
+
+				})
+				.on('keydown', function(event) {
+
+					// Hide on escape.
+						if (event.keyCode == 27)
+							$modal._hide();
+
+				});
 
 	});
 
