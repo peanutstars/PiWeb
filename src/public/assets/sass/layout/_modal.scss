@@ -7,14 +7,13 @@
 /* Modal */
 
 	#wrapper {
-		@include vendor('transition', 'opacity #{_duration(modal)} ease');
+		// @include vendor('transition', 'opacity #{_duration(modal)} ease');
 		opacity: 1;
 	}
 
 	#modal {
 		// @include vendor('transform', 'translateX(#{_size(modal)})');
-		@include vendor('transform', 'translateX(70%)');
-		@include vendor('transition', ('transform #{_duration(modal)} ease', 'visibility #{_duration(modal)}'));
+		// @include vendor('transition', ('transform #{_duration(modal)} ease', 'visibility #{_duration(modal)}'));
 		position: fixed;
 		top: 20%;
 		right: 15%;
@@ -29,7 +28,7 @@
 		z-index: _misc(z-index-base) + 2;
 
 		> .inner {
-			@include vendor('transition', 'opacity #{_duration(modal)} ease');
+			// @include vendor('transition', 'opacity #{_duration(modal)} ease');
 			-webkit-overflow-scrolling: touch;
 			position: absolute;
 			top: 0;
@@ -39,6 +38,8 @@
 			padding: 2.75em;
 			opacity: 0;
 			overflow-y: auto;
+			background: _palette(bg);
+			color: _palette(fg);
 
 			> ul {
 				list-style: none;
@@ -87,7 +88,7 @@
 			white-space: nowrap;
 
 			&:before, &:after {
-				@include vendor('transition', 'opacity #{_duration(transition)} ease');
+				// @include vendor('transition', 'opacity #{_duration(transition)} ease');
 				content: '';
 				display: block;
 				position: absolute;
@@ -147,6 +148,7 @@
 			@include vendor('pointer-events', 'none');
 			cursor: default;
 			opacity: 0.25;
+			background: #212f3c;
 		}
 
 		#modal {

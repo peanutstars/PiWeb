@@ -2934,22 +2934,10 @@ body.is-menu-visible #menu .close {
 
 /* Modal */
 #wrapper {
-  -moz-transition: opacity 0.45s ease;
-  -webkit-transition: opacity 0.45s ease;
-  -ms-transition: opacity 0.45s ease;
-  transition: opacity 0.45s ease;
   opacity: 1;
 }
 
 #modal {
-  -moz-transform: translateX(70%);
-  -webkit-transform: translateX(70%);
-  -ms-transform: translateX(70%);
-  transform: translateX(70%);
-  -moz-transition: -moz-transform 0.45s ease, visibility 0.45s;
-  -webkit-transition: -webkit-transform 0.45s ease, visibility 0.45s;
-  -ms-transition: -ms-transform 0.45s ease, visibility 0.45s;
-  transition: transform 0.45s ease, visibility 0.45s;
   position: fixed;
   top: 20%;
   right: 15%;
@@ -2964,10 +2952,6 @@ body.is-menu-visible #menu .close {
   z-index: 10002;
 }
 #modal > .inner {
-  -moz-transition: opacity 0.45s ease;
-  -webkit-transition: opacity 0.45s ease;
-  -ms-transition: opacity 0.45s ease;
-  transition: opacity 0.45s ease;
   -webkit-overflow-scrolling: touch;
   position: absolute;
   top: 0;
@@ -2977,6 +2961,8 @@ body.is-menu-visible #menu .close {
   padding: 2.75em;
   opacity: 0;
   overflow-y: auto;
+  background: #ffffff;
+  color: #585858;
 }
 #modal > .inner > ul {
   list-style: none;
@@ -2999,10 +2985,10 @@ body.is-menu-visible #menu .close {
   margin-top: -1em;
 }
 #modal > .close {
-  -moz-transition: opacity 0.45s ease, -moz-transform 0.45s ease;
-  -webkit-transition: opacity 0.45s ease, -webkit-transform 0.45s ease;
-  -ms-transition: opacity 0.45s ease, -ms-transform 0.45s ease;
-  transition: opacity 0.45s ease, transform 0.45s ease;
+  -moz-transition: opacity 0.2s ease, -moz-transform 0.2s ease;
+  -webkit-transition: opacity 0.2s ease, -webkit-transform 0.2s ease;
+  -ms-transition: opacity 0.2s ease, -ms-transform 0.2s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease;
   -moz-transform: scale(0.25) rotate(180deg);
   -webkit-transform: scale(0.25) rotate(180deg);
   -ms-transform: scale(0.25) rotate(180deg);
@@ -3023,10 +3009,6 @@ body.is-menu-visible #menu .close {
   white-space: nowrap;
 }
 #modal > .close:before, #modal > .close:after {
-  -moz-transition: opacity 0.2s ease;
-  -webkit-transition: opacity 0.2s ease;
-  -ms-transition: opacity 0.2s ease;
-  transition: opacity 0.2s ease;
   content: '';
   display: block;
   position: absolute;
@@ -3054,11 +3036,11 @@ body.is-menu-visible #menu .close {
 }
 @media screen and (max-width: 736px) {
   #modal {
-    -moz-transform: translateX(33em);
-    -webkit-transform: translateX(33em);
-    -ms-transform: translateX(33em);
-    transform: translateX(33em);
-    width: 33em;
+    -moz-transform: translateX(51em);
+    -webkit-transform: translateX(51em);
+    -ms-transform: translateX(51em);
+    transform: translateX(51em);
+    width: 51em;
   }
   #modal > .inner {
     padding: 2.75em 1.5em;
@@ -3081,6 +3063,7 @@ body.is-modal-visible #wrapper {
   pointer-events: none;
   cursor: default;
   opacity: 0.25;
+  background: #212f3c;
 }
 body.is-modal-visible #modal {
   -moz-transform: translateX(0);

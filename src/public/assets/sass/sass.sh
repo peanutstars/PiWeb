@@ -1,4 +1,6 @@
 #!/bin/bash
 
-sass --style expanded main.scss main.css
-cp -a main.css 
+MCSS=main.css
+
+sass --style expanded main.scss $MCSS
+mv $MCSS  ../css/$MCSS
