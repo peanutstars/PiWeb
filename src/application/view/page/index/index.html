@@ -31,6 +31,7 @@
             renderBookmark(resp.bookmark) ;
         }) ;
         $("form").jCryption({ getKeysURL: "/users/pubkey", handshakeURL: "/users/handshake" })
+        $$modal_show()
     }) ;
     function renderBookmark(data) {
         function renderBookmarkTitle(sel, title) {

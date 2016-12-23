@@ -222,6 +222,7 @@
 					$body.addClass('is-modal-visible');
 
 			};
+			$$modal_show = $modal._show;
 
 			$modal._hide = function() {
 
@@ -229,6 +230,7 @@
 					$body.removeClass('is-modal-visible');
 
 			};
+			$$modal_hide = $modal._hide;
 
 			$modal._toggle = function() {
 
@@ -265,26 +267,19 @@
 
 			$body
 				.on('click', 'a[href="#modal"]', function(event) {
-
 					event.stopPropagation();
 					event.preventDefault();
-
 					// Toggle.
 						$modal._toggle();
-
 				})
 				.on('click', function(event) {
-
 					// Hide.
 						$modal._hide();
-
 				})
 				.on('keydown', function(event) {
-
 					// Hide on escape.
 						if (event.keyCode == 27)
 							$modal._hide();
-
 				});
 
 	});
