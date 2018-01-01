@@ -4,23 +4,6 @@
     <div id="main">
         <div class="inner" id="bookmark">
             <h1>Bookmark</h1>
-            {# <section>
-                <h2>Get in touch</h2>
-                <form method="POST" action="/users/authentication">
-                    <div class="field half first">
-                        <input type="text" name="name" id="name" placeholder="Name" value="hslee" />
-                    </div>
-                    <div class="field half">
-                        <input type="email" name="email" id="email" placeholder="Email" value="test@sample.com" />
-                    </div>
-                    <div class="field">
-                        <textarea name="message" id="message" placeholder="Message">Message for jCryption</textarea>
-                    </div>
-                    <ul class="actions">
-                        <li><button type="submit" value="Send" class="special" />send</li>
-                    </ul>
-                </form>
-            </section>#}
         </div>
     </div>
 {% endblock %}
@@ -31,7 +14,7 @@
             renderBookmark(resp.bookmark) ;
         }) ;
         $("form").jCryption({ getKeysURL: "/users/pubkey", handshakeURL: "/users/handshake" })
-        $$modal_show()
+        // $$modal_show()
     }) ;
     function renderBookmark(data) {
         function renderBookmarkTitle(sel, title) {
