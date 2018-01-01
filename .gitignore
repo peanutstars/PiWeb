@@ -2,6 +2,7 @@
 *.swp
 *.bak
 *.deb
+client_secret.json
 dpkg/opt
 dpkg/DEBIAN/control
 src/application/version.py
