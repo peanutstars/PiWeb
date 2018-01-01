@@ -4,4 +4,4 @@
 view:
     title: Peanut, Stars & Me
     titlelink: http://blog.naver.com/hseok74
-    favicon: './public/images/favicon.ico'
+    favicon: './public/static/images/favicon.ico'

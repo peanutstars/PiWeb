@@ -1,9 +1,11 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+import codecs
 import datetime
 import json
 import time
+import yaml
 
 class Stamp:
     # FORM        = '%Y-%m-%d %H:%M:%S.%f'
@@ -52,10 +54,12 @@ class Loader :
     def loadXML(fpath) :
         with codecs.open(fpath, 'r', encoding='utf-8') as f :
             return objectify.fromstring(f.read()) ;
+
     @staticmethod
     def storeXML(fpath, xobj) :
         with codecs.open(fpath, 'w', encoding='utf-8') as f :
             f.write(etree.tostring(xobj, pretty_print=True)) ;
+
     @staticmethod
     def loadYML(fpath) :
         yaml.add_constructor("!include", Loader.yaml_include)
@@ -64,6 +68,7 @@ class Loader :
                 return yaml.load(f) ;
             except yaml.YAMLError as e :
                 raise LoaderError('file : %s' % fpath) ;
+
     @staticmethod
     def yaml_include(loader, node):
         # Get the path out of the yaml file
@@ -72,13 +77,22 @@ class Loader :
             print("including " + inputfile.name)
             return yaml.load(inputfile)
 
+    @staticmethod
+    def yaml_merge(user, default):
+        if isinstance(user,dict) and isinstance(default,dict):
+            for k,v in default.items():
+                if k not in user:
+                    user[k] = v
+                else:
+                    user[k] = Loader.yaml_merge(user[k],v)
+        return user
 
 class Config(metaclass=Singleton) :
     # __metaclass__ = Singleton ;
     def __init__(self, ymlFile) :
         INFO(ymlFile) ;
         if not os.path.exists(ymlFile) :
-            raise DBConfigError('Not found a DB config file[%s]' % ymlFile) ;
+            raise DBConfigError('Not found a DB config file[%s]' % ymlFile)
         self._data = Loader.loadYML(ymlFile) ;
         # self.dump()
 
@@ -87,14 +101,14 @@ class Config(metaclass=Singleton) :
         print(jstr)
 
     def getValue(self, key, defValue='NoDefValue'):
-        arr = key.split('.') ;
-        data = self._data ;
+        arr = key.split('.')
+        data = self._data
         for on in arr :
-            # ERR('%s - %s' % (on, str(data))) ;
+            # ERR('%s - %s' % (on, str(data)))
             if on in data :
-                data = data[on] ;
+                data = data[on]
             else :
                 if defValue == 'NoDefValue':
-                    raise DBConfigError("A '%s' key is not exist" % key) ;
+                    raise DBConfigError("A '%s' key is not exist" % key)
                 return defValue
         return data ;

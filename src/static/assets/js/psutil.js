@@ -36,7 +36,7 @@ var psutil = {
             }
         } ,
         opts.error = function(response) {
-            console.log('Fail\n' + response.errorMsg) ;
+            console.log('Fail\n' + response.errorMsg);
         }
         $.ajax(opts) ;
     }

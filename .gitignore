@@ -2,7 +2,9 @@
 *.swp
 *.bak
 *.deb
+venv
 client_secret.json
+version.py
 dpkg/opt
 dpkg/DEBIAN/control
 src/application/version.py
