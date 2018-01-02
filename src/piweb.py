@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import json
-
 from flask import Flask, render_template, jsonify, redirect
 
 from lib.utils import Loader
@@ -17,7 +15,7 @@ app = Flask(__name__)
 def index():
     return render_template('bookmark/index.html', view=setup['view'])
 
-@app.route('/bookmark')
+@app.route('/api/bookmark')
 def ajax_bookmark():
     bm = Loader.loadYML(setup['bookmark'])
     return jsonify(WebResponse(True, bm))
@@ -28,4 +26,5 @@ def favicon():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.config.from_pyfile(setup['flask']['cfg'])
+    app.run(threaded=True)

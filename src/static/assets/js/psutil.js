@@ -41,7 +41,7 @@ var psutil = {
         $.ajax(opts) ;
     }
     , getBookmark : function(callback) {
-        this.get('/bookmark', {}, callback) ;
+        this.get('/api/bookmark', {}, callback) ;
     }
     , generateSelector : function(prefix, name) {
         return prefix+'-'+name.replace(/ /g,'-') ;

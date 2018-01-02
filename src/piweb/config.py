@@ -2,6 +2,7 @@
 
 import codecs
 import datetime
+import json
 import os
 import yaml
 
@@ -9,10 +10,17 @@ from lib.utils import Loader
 
 from .version import Version
 
-_path   = os.path.abspath(os.path.dirname(__file__))
+
+_PIW_PATH = '/var/piweb/config'
+_DEF_PATH = os.path.abspath(os.path.dirname(__file__))
+
 
 defSetup = {
-    'bookmark': _path+'/../config/bookmark.yml',
+    'flask': {
+        'cfg': _PIW_PATH + '/flask.cfg',
+        'log': _PIW_PATH + '/log',
+    },
+    'bookmark': _PIW_PATH + '/bookmark.yml',
     'view': {
         'title':        'PiWeb',
         'titlelink':    '/',
@@ -20,9 +28,15 @@ defSetup = {
     }
 }
 
-setup = Loader.loadYML(_path+'/../config/setup.yml')
-setup = Loader.yaml_merge(setup, defSetup)
-setup['view']['version'] = Version.getVersion()
-setup['view']['build_time'] = \
-        datetime.datetime.fromtimestamp(Version.getBuildTime()).utcnow()\
-        .strftime('%Y-%m-%d %H:%M:%S-UTC') ;
+def load_setup():
+    usPath = _PIW_PATH+'/setup.yml'
+    ds = Loader.loadYML(usPath)
+    ds = Loader.yaml_merge(ds, defSetup)
+    ds['view']['version'] = Version.getVersion()
+    ds['view']['build_time'] = \
+            datetime.datetime.fromtimestamp(Version.getBuildTime()).utcnow()\
+            .strftime('%Y-%m-%d %H:%M:%S-UTC')
+    return ds
+
+
+setup = load_setup()
