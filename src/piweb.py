@@ -4,12 +4,14 @@
 from flask import Flask, render_template, jsonify, redirect
 
 from lib.utils import Loader
-from piweb.config import setup
-from piweb.model import WebResponse
+from core.debug import init_debug, INFO
+from core.config import setup, init_flask
+from core.model import WebResponse
 
 
-app = Flask(__name__)
-
+app = Flask('flaskr')
+init_flask(app)
+init_debug(app)
 
 @app.route('/')
 def index():
@@ -26,5 +28,5 @@ def favicon():
 
 
 if __name__ == '__main__':
-    app.config.from_pyfile(setup['flask']['cfg'])
+    INFO('##### START ##### :-)')
     app.run(threaded=True)
