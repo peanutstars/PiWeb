@@ -10,7 +10,8 @@ import yaml
 from logging import Formatter
 from logging.handlers import RotatingFileHandler
 
-from lib.utils import Loader
+from core.debug import DBG
+from lib.utils import Loader, Singleton
 from .version import Version
 
 
@@ -20,10 +21,6 @@ _DEF_PATH = os.path.abspath(os.path.dirname(__file__))
 _LOG_FORMAT = '[%(asctime)s] %(levelname)s: %(message)s'
 
 defSetup = {
-    'flask': {
-        'cfg': _PIW_PATH + '/config/flask.cfg',
-        'log': _PIW_PATH + '/log/piweb',
-    },
     'bookmark': _PIW_PATH + '/config/bookmark.yml',
     'view': {
         'title':        'PiWeb',
@@ -45,17 +42,14 @@ def load_setup():
 
 def init_log(app, logMode=logging.DEBUG):
     # logging to file
-    logFile = setup['flask']['log']
-    logSize = 1000000
-    logCount = 1
-    if 'log' in setup:
-        slog = setup['log']
-        logFile = slog.get('file', logFile)
-        logSize = slog.get('size', logSize)
-        logCount = slog.get('count', logCount)
+    logFolder = Config().get_value('flask.log.folder', './')
+    logFile = Config().get_value('flask.log.file', 'logging')
+    logSize = Config().get_value('flask.log.size', 1000000)
+    logCount = Config().get_value('flask.log.count', 1)
 
     logMode = logging.INFO
-    h = RotatingFileHandler(logFile, maxBytes=logSize, backupCount=logCount)
+    logPath = logFolder + logFile
+    h = RotatingFileHandler(logPath, maxBytes=logSize, backupCount=logCount)
     h.setFormatter(Formatter(_LOG_FORMAT))
     h.setLevel(logMode)
 
@@ -70,6 +64,22 @@ def init_log(app, logMode=logging.DEBUG):
 def init_flask(app):
     # flask config
     init_log(app)
-    app.config.from_pyfile(setup['flask']['cfg'])
+    app.config.from_pyfile(Config().get_value('flask.cfg'))
 
-setup = load_setup()
+
+class Config(metaclass=Singleton):
+    def __init__(self, data):
+        self._data = data
+
+    def get_value(self, key, defValue=None):
+        data = self._data
+        for k in key.split('.'):
+            if k in data:
+                data = data[k]
+            else:
+                data = defValue
+                break
+        return data
+
+
+Config(load_setup())

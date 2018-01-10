@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-app = None
+from core import app
 
 def ERR(msg):
     app.logger.error(msg)
@@ -10,7 +10,7 @@ def DBG(msg):
 
 def INFO(msg):
     app.logger.info(msg)
-
-def init_debug(iapp):
-    global app
-    app = iapp
+#
+# def init_debug(iapp):
+#     global app
+#     app = iapp
