@@ -18,6 +18,10 @@ def ajax_bookmark():
     bm = Loader.loadYML(Config().get_value('bookmark'))
     return jsonify(WebResponse(True, bm))
 
+@app.route('/api/dialog/<layout>')
+def ajax_get_dialog(layout):
+    return jsonify(WebResponse(True, render_template('dialog/%s.html' % layout)))
+
 @app.route('/favicon.ico')
 def favicon():
     return redirect('/static/images/favicon.ico', code=302)

@@ -2943,7 +2943,7 @@ body.is-menu-visible #menu .close {
   right: 15%;
   width: 70%;
   max-width: 80%;
-  height: 60%;
+  height: 50%;
   -webkit-overflow-scrolling: touch;
   background: #585858;
   color: #ffffff;

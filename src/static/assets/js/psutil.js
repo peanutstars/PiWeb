@@ -43,6 +43,15 @@ var psutil = {
     , getBookmark : function(callback) {
         this.get('/api/bookmark', {}, callback) ;
     }
+    , showDialog: function(dialog, tag, show) {
+        console.log('#####')
+        this.get('/api/dialog/'+dialog, {}, function(resp){
+            $('#'+tag).html(resp);
+            console.log(tag);
+            console.log(resp);
+            show();
+        })
+    }
     , generateSelector : function(prefix, name) {
         return prefix+'-'+name.replace(/ /g,'-') ;
     }
