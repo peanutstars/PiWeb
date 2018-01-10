@@ -13,7 +13,7 @@ VER_MINOR		:= $(shell echo '$(FULL_VERSION)' | awk -F. {'print $$2'})
 VER_INDEX		:= $(shell echo '$(FULL_VERSION)' | awk -F. {'print $$3'})
 VERSION			:= $(VER_MAJOR).$(VER_MINOR).$(VER_INDEX)
 BUILD_UTC_TIME	:= $(shell date +'%s')
-VERSION_FILE	:= $(DIR_PWD)/piweb/version.py
+VERSION_FILE	:= $(DIR_PWD)/core/version.py
 
 DUMMY_FILES 	:= $(shell find . -name __pycache__)
 INSTALLDIR		:= $(PIWEB_OUTPUT_DIR)/opt/psapps/piweb

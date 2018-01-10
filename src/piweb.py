@@ -11,6 +11,7 @@ init_flask(app)
 
 if __name__ == '__main__':
     INFO('##### START ##### :-)')
-    host = Config().get_value('flask.host')
-    port = Config().get_value('flask.port')
+    cfg = Config()
+    host = cfg.get_value('flask.host')
+    port = cfg.get_value('flask.port')
     app.run(host=host, port=port, threaded=True)

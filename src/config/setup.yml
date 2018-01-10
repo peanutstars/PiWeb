@@ -1,6 +1,15 @@
 # -*- coding: utf-8 -*-
-# setup
 
+
+flask:
+    host: 0.0.0.0
+    port: 8080
+    cfg: /var/piweb/config/flask.cfg
+    log:
+        folder: /var/piweb/log/
+        file: piweb.log
+        size: 5000000
+        count: 9
 view:
     title: Peanut, Stars & Me
     titlelink: http://blog.naver.com/hseok74
