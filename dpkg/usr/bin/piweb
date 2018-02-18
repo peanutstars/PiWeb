@@ -29,13 +29,14 @@ shift
 
 pushd $PiWeb
 
+source venv/bin/activate
 case "$CMD" in
 	start)
         run_noip2
-		sg psapps -c "./piwserver.py $*"
+		sg psapps -c "./piweb.py $*"
 		;;
     stop)
-        sg psapps -c "killall -INT piwserver.py"
+        sg psapps -c "killall -INT piweb.py"
         ;;
 	*)
 		usage

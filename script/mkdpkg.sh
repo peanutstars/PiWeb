@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DPKG_DIR=$PIWEB_ROOT_DIR/dpkg
-VERSION_FILE=$PIWEB_SRC_DIR/application/version.py
+VERSION_FILE=$PIWEB_SRC_DIR/core/version.py
 DPKG_CONTROL_FILE=$DPKG_DIR/DEBIAN/control
 
 Version=`cat $VERSION_FILE | grep "return" | grep "\"" | awk -F\" '{ print $2 }'`
@@ -31,7 +31,7 @@ generateControl() {
 	cat >$DPKG_CONTROL_FILE <<EOF
 Package: $Package
 Version: $Version
-Depends: python3, python3-pip, libncurses5-dev, libreadline-dev
+Depends: python3, python3-pip, libncurses5-dev, libreadline-dev, virtualenv
 Priority: optional
 Architecture: $Architecture
 Section: Network

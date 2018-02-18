@@ -2,6 +2,7 @@
 *.swp
 *.bak
 *.deb
+requirements.txt
 venv
 client_secret.json
 version.py

@@ -7,8 +7,9 @@ echo "Executing prerm"
 
 if [ -e "$DIR_TARGET" ] ; then
     piweb stop
-    find $DIR_TARGET -name "*.pyc" -exec rm -rf {} \;
-    find $DIR_TARGET -name "__pycache__" -exec rm -rf {} \;
+    #find $DIR_TARGET -name "__pycache__" -exec rm -rf {} \;
 fi
 
 update-rc.d -f piweb remove
+rm -rf $DIR_TARGET/venv
+

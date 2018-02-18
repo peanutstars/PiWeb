@@ -2,6 +2,12 @@
 
 DIR_TARGET=/opt/psapps/piweb
 
+PyEnviron() {
+    virtualenv $DIR_TARGET/venv
+    source $DIR_TARGET/venv/bin/activate
+    echo 'Installed venv:' `which pip`
+    pip install -r $DIR_TARGET/requirements.txt
+}
 
 PiWebService() {
     update-rc.d piweb defaults 99 10
@@ -11,3 +17,4 @@ PiWebService() {
 echo "Executing postinst"
 
 PiWebService
+PyEnviron

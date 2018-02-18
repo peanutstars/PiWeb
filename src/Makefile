@@ -17,7 +17,7 @@ VERSION_FILE	:= $(DIR_PWD)/core/version.py
 
 DUMMY_FILES 	:= $(shell find . -name __pycache__)
 INSTALLDIR		:= $(PIWEB_OUTPUT_DIR)/opt/psapps/piweb
-SCRIPT_FILES	:= application config config.py piwserver.py public
+SCRIPT_FILES	:= config core lib piweb.py static templates requirements.txt
 
 
 
@@ -47,4 +47,5 @@ clean:
 
 install: all clean
 	@install -d $(INSTALLDIR)
+	@(pip freeze -l > requirements.txt)
 	@(cp -a $(SCRIPT_FILES) $(INSTALLDIR))
