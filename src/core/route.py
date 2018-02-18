@@ -20,7 +20,7 @@ def ajax_bookmark():
 
 @app.route('/api/dialog/<layout>')
 def ajax_get_dialog(layout):
-    return jsonify(WebResponse(True, render_template('dialog/%s.html' % layout)))
+    return jsonify(WebResponse(True, render_template('dialog/%s' % layout)))
 
 @app.route('/favicon.ico')
 def favicon():

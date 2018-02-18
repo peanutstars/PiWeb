@@ -41,16 +41,17 @@ var psutil = {
         $.ajax(opts) ;
     }
     , getBookmark : function(callback) {
-        this.get('/api/bookmark', {}, callback) ;
+        this.get('/api/bookmark', {}, callback);
     }
-    , showDialog: function(dialog, tag, show) {
-        console.log('#####')
+    , showDialog: function(dialog, tag, showcb, height) {
+        if (height) {
+            $('#'+tag).css({'height': height});
+        }
         this.get('/api/dialog/'+dialog, {}, function(resp){
-            $('#'+tag).html(resp);
-            console.log(tag);
-            console.log(resp);
-            show();
-        })
+            // $('#'+tag).html(resp);
+            $(resp).appendTo('#'+tag);
+            showcb();
+        });
     }
     , generateSelector : function(prefix, name) {
         return prefix+'-'+name.replace(/ /g,'-') ;

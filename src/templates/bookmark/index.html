@@ -13,9 +13,8 @@
         psutil.getBookmark(function(resp){
             renderBookmark(resp.bookmark) ;
         }) ;
-        $("form").jCryption({ getKeysURL: "/users/pubkey", handshakeURL: "/users/handshake" })
-        // $$modal_show()
-        psutil.showDialog('login', 'modal', $$modal_show)
+        $("form").jCryption({ getKeysURL: "/users/pubkey", handshakeURL: "/users/handshake" });
+        psutil.showDialog('login.html', 'modal', $$modal_show);
     }) ;
     function renderBookmark(data) {
         function renderBookmarkTitle(sel, title) {
@@ -34,7 +33,7 @@
             renderBookmarkTitle('#bookmark', t.name) ;
             var itemSelName = '#'+psutil.generateSelector('bookmark',t.name) ;
             t.list.forEach(function(s){
-                console.log(s) ;
+                // console.log(s);
                 renderBookmarkItem(itemSelName, s) ;
             }) ;
         }) ;
