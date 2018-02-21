@@ -33,10 +33,13 @@ source venv/bin/activate
 case "$CMD" in
 	start)
         run_noip2
-		sg psapps -c "./piweb.py $*"
+		sg psapps -c "./piweb.py $*" &
+        echo "Started piweb"
 		;;
     stop)
-        sg psapps -c "killall -INT piweb.py"
+        PID=`ps xa | grep piweb.py | grep python | xargs | cut -d\  -f 1`
+        [ -n "$PID" ] && sg psapps -c "kill -INT $PID"
+        echo "Stopped piweb"
         ;;
 	*)
 		usage

@@ -22,6 +22,10 @@ def ajax_bookmark():
 def ajax_get_dialog(layout):
     return jsonify(WebResponse(True, render_template('dialog/%s' % layout)))
 
+@app.route('/api/user/<id>')
+def ajax_user(id):
+    return jsonify(WebResponse(False, 'ID or Password is not matched.'))
+
 @app.route('/favicon.ico')
 def favicon():
     return redirect('/static/images/favicon.ico', code=302)

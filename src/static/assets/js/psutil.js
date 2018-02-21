@@ -43,14 +43,14 @@ var psutil = {
     , getBookmark : function(callback) {
         this.get('/api/bookmark', {}, callback);
     }
-    , showDialog: function(dialog, tag, showcb, height) {
+    , showDialog: function(dialog, tag, height) {
         if (height) {
             $('#'+tag).css({'height': height});
         }
         this.get('/api/dialog/'+dialog, {}, function(resp){
             // $('#'+tag).html(resp);
             $(resp).appendTo('#'+tag);
-            showcb();
+            $$modal_show()
         });
     }
     , generateSelector : function(prefix, name) {

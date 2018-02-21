@@ -14,7 +14,7 @@
             renderBookmark(resp.bookmark) ;
         }) ;
         $("form").jCryption({ getKeysURL: "/users/pubkey", handshakeURL: "/users/handshake" });
-        psutil.showDialog('login.html', 'modal', $$modal_show);
+        psutil.showDialog('login.html', 'modal', '30%');
     }) ;
     function renderBookmark(data) {
         function renderBookmarkTitle(sel, title) {
